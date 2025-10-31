@@ -13,7 +13,7 @@ end
 -- returns error if is, 0 if all is ok
 local function gcc_compile(path, bodyname)
     vim.api.nvim_command('update')
-    local compile_log = vim.fn.system('g++ ' .. path .. ' -o ' .. bodyname)
+    local compile_log = vim.fn.system('gcc ' .. path .. ' -o ' .. bodyname)
     local error = vim.v.shell_error
     return error
 end
