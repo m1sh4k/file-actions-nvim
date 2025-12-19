@@ -31,9 +31,9 @@ local function gcc_compile(path, bodyname, filedir)
 	return error, compile_log
 end
 
-local function make_run(filedir)
+local function make_command(filedir, command)
 	vim.api.nvim_command('update')
-	vim.api.nvim_command('update | split | terminal cd ' .. filedir .. ' && make run')
+	vim.api.nvim_command('update | split | terminal cd ' .. filedir .. ' && make ' .. command)
 end
 
 
@@ -129,8 +129,20 @@ M['universal'] = {
 				print('There is no Makefile in this directory!')
 				return
 			end
-			make_run(filedir)
+			make_command(filedir, 'run')
 		end
 	},
+	{
+		'MakeRunValgrind',
+		function ()
+			local path = vim.api.nvim_buf_get_name(0)
+			local filedir = get_filedir(path)
+			if not file_exists(filedir .. 'Makefile') then
+				print('There is no Makefile in this directory!')
+				return
+			end
+			make_command(filedir, 'run_valgrind')
+		end
+	}
 }
 return M

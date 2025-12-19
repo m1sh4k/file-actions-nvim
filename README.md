@@ -16,3 +16,4 @@ This is a script written in pure lua which is made to create neovim commands (fo
     - for `python` ruff check
     - for `c` build code, run with valgrind is build succed, else show build errors
 + `:FileActionsMakeRun` — run `make run` command in opened file directory
++ `:FileActionsMakeRunValgrind` — run `make run_valgrind` command in opened file directory
