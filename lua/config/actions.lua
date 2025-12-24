@@ -15,7 +15,7 @@ local function get_bodyname(path, extension)
 	return bodyname
 end
 
-
+-- path of the directory where opened file is
 local function get_filedir(path)
 	local filedir = path:gsub("/[%a%d._-]*$", "") .. '/'
 	return filedir
