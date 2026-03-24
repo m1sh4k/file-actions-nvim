@@ -68,7 +68,7 @@ M['c++'] = {
 		function(extension)
 			local path = vim.api.nvim_buf_get_name(0)
 			local bodyname = get_bodyname(path, extension)
-			local error = gcc_compile(path, bodyname)
+			local error, compile_log = gcc_compile(path, bodyname)
 			if error == 0 then
 				vim.api.nvim_command('split | terminal ./' .. bodyname)
 				vim.api.nvim_feedkeys(CR_key, "n", false)
@@ -103,7 +103,7 @@ M['c'] = {
 		function(extension)
 			local path = vim.api.nvim_buf_get_name(0)
 			local bodyname = get_bodyname(path, extension)
-			local filedir = get_filedir(path, bodyname)
+			local filedir = get_filedir(path)
 			vim.api.nvim_command('update')
 			local error, compile_log = gcc_compile(path, bodyname, filedir)
 			if error == 0 then
@@ -145,4 +145,23 @@ M['universal'] = {
 		end
 	}
 }
+
+
+M['c_header'] = {
+{
+		'AddHeaderGuard',
+		function ()
+			local filename = vim.api.nvim_buf_get_name(0):upper():gsub(".*/", "") -- upper filename
+			filename = filename:gsub("%.", "_")  -- replace '.' with '_'
+			local ifndef_this = "#ifndef " .. filename
+			local define_this = "#define " .. filename
+			local endif_this = "#endif"
+			vim.api.nvim_buf_set_lines(0, 0, 0, false, { ifndef_this, define_this, "", "" })
+			vim.api.nvim_buf_set_lines(0, -1, -1, false, { "", "", endif_this})
+
+		end
+	}
+}
+
+
 return M
