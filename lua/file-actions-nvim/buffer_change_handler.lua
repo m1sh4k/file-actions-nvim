@@ -1,4 +1,7 @@
 local function extension_in_filetype(file_ftypes, action_ftype)
+	if file_ftypes == nil then
+		return false
+	end
 	for _, checkin_ftype in pairs(file_ftypes) do
 		if checkin_ftype == action_ftype then
 			return true

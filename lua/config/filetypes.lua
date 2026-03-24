@@ -1,9 +1,24 @@
 local M = {}
 
-M['py'] = {'python'}
-M['cpp'] = {'c++', 'c++_exec'}
-M['cxx'] = {'c++', 'c++_exec'}
-M['c'] = {'c', 'c_exec'}
-M['h'] = {'c', 'c_header'}
+
+local ftypes_list = {
+	'c',
+	'cpp',
+	'python'
+}
+
+local function extend(tbl_to, tbl_from)
+	for key_from, val_from in pairs(tbl_from) do
+		tbl_to[key_from] = val_from
+	end
+end
+
+
+for _, ftype in pairs(ftypes_list) do
+	local tmp_list = require('lua.config.filetypes.' .. ftype)
+	extend(M, tmp_list)
+end
+
+
 
 return M
