@@ -80,7 +80,7 @@ M['c++'] = {
 }
 
 -- c commands
-M['c'] = {
+M['c_exec'] = {
 	--compile cuurent file using gcc and show compile erros if there were ones else execute
 	{
 		'ExecuteCode',
