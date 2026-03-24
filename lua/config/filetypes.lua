@@ -15,7 +15,7 @@ end
 
 
 for _, ftype in pairs(ftypes_list) do
-	local tmp_list = require('lua.config.filetypes.' .. ftype)
+	local tmp_list = require('config.filetype_setups.' .. ftype)
 	extend(M, tmp_list)
 end
 
